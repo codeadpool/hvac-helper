@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 
 const faqs = [
   {
@@ -35,8 +34,7 @@ const ServiceFAQs = () => {
 
   return (
     <section className="relative w-full py-24 bg-[#f5f5f7] overflow-hidden font-mono">
-      {/* Background Accent */}
-      <div className="absolute inset-0  opacity-20 blur-[100px]" />
+      <div className="absolute inset-0 opacity-20 blur-[100px]" />
 
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
         <h2 className="bold-52 lg:bold-88 text-black mb-12">
@@ -45,33 +43,26 @@ const ServiceFAQs = () => {
 
         <div className="space-y-6">
           {faqs.map((faq, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1, duration: 0.4 }}
-              className="bg-white text-black p-6 rounded-xl shadow-md cursor-pointer transition"
+              className="bg-white text-black p-6 rounded-xl shadow-md cursor-pointer transition-all duration-300 ease-in-out"
               onClick={() => toggleFAQ(index)}
             >
               <div className="flex justify-between items-center">
                 <h3 className="text-lg font-semibold">{faq.question}</h3>
-                <span className="text-blue-400 text-2xl">
+                <span className="text-blue-400 text-2xl transition-transform duration-200 ease-in-out">
                   {activeIndex === index ? "−" : "+"}
                 </span>
               </div>
 
-              <motion.p
-                initial={{ height: 0, opacity: 0 }}
-                animate={{
-                  height: activeIndex === index ? "auto" : 0,
-                  opacity: activeIndex === index ? 1 : 0,
-                }}
-                transition={{ duration: 0.3 }}
-                className="overflow-hidden mt-3 text-black text-left"
+              <div
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                  activeIndex === index ? "max-h-96 opacity-100 mt-3" : "max-h-0 opacity-0"
+                }`}
               >
-                {faq.answer}
-              </motion.p>
-            </motion.div>
+                <p className="text-black text-left">{faq.answer}</p>
+              </div>
+            </div>
           ))}
         </div>
       </div>
